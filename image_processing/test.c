@@ -50,31 +50,6 @@ int main()
     char *file="images\\doom.bmp";
     IMG *img=getImage(file);
     renderAsciiArt_terminal(exp_pool(img));
-    //render_terminal(img);
-    //renderAsciiArt_char_render_twice(img);
-    createImgDirect("out.bmp",exp_pool(img));
-    IMG *gimg=getImage(file);
-    for(int i=0;i<5;i++)
-    {
-      IMG *t=gimg;
-      gimg=uncropFilter(gimg,exp_pool,1);
-      freeIMG(t);
-    }
-   createImgDirect("out2.bmp",gimg);
-   IMG *sob=uncropFilter(greyScale(gimg),sobelsEdgeDectorHorizontal,1);
-   IMG *soby=uncropFilter(greyScale(gimg),sobelsEdgeDectorVertical,1);
-    createImgDirect("out3.bmp",sob);
-    for(int i=1;i<gimg->height-1;i++)
-    {
-      for(int j=0;j<gimg->width;j++)
-      {
-        if(soby->rgb[i][j].r>15 || sob->rgb[i][j].r>15)
-        {
-          gimg->rgb[i][j].r=gimg->rgb[i][j].g=gimg->rgb[i][j].b=0;
-        }
-      }
-    }
-    createImgDirect("out4.bmp",gimg);
     printf("Success");
     return 0;
 }
